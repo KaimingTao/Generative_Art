@@ -14,7 +14,7 @@ def setup(bgcolor='white'):
 def get_pen():
     pen = turtle.Turtle()
     pen.color("orange")
-    pen.pensize(3)
+    # pen.pensize(1)
     pen.penup()
 
     return pen
