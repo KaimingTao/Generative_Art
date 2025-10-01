@@ -86,14 +86,16 @@ class Line:
             # 2 * error -= 2 dx
             # because dy/dx = delta_y / delta_x
             # all operation can be scaled to delta y and delta x
+            # and keey dy dx same sign as positive
 
-            y_error += 2 * self.delta_y
-            if y_error > (self.delta_x):
-                y = y + 1 if self.delta_y > 0 else -1
+            y_error += abs(2 * self.delta_y)
+            if y_error > self.delta_x:
+                y += 1 if self.delta_y > 0 else -1
 
                 y_error -= 2 * self.delta_x
 
     def draw1(self, canvas):
+        raise NotImplementedError
         # Issue, not continous points
         for i in range(0, 100, 2):
             x = self.p1.x + (self.p2.x - self.p1.x) * i
@@ -101,6 +103,7 @@ class Line:
             canvas[x, y] = self.color
 
     def draw2(self, canvas):
+        raise NotImplementedError
         # Issue only for line abs(tan()) < 1
         # Issue, vertical line
         # Issue, If p2.x < p1.x
@@ -110,6 +113,7 @@ class Line:
             canvas[x, y] = self.color
 
     def draw3(self, canvas):
+        raise NotImplementedError
         # Issue only for line abs(tan()) < 1
         if self.p1.x > self.p2.x:
             self.p1, self.p2 = self.p2, self.p1
@@ -120,6 +124,7 @@ class Line:
             canvas[x, y] = self.color
 
     def _draw(self, canvas):
+        # raise NotImplementedError
         # Final version before optimization
         steep = abs(self.delta_x) < abs(self.delta_y)
         if steep:
