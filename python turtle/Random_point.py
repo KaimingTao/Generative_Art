@@ -12,28 +12,31 @@ def int_to_rgb(hue: int, saturation: float = 1.0, value: float = 1.0):
     return r, g, b
 
 
-def Square_spiral(pen):
+def Random_point(pen, screen):
 
-    steps = 100
-    pen.pendown()
-    step_length = 4
-    turn = 92
-    turn_move = 0.01
+    steps = 200
 
     for i in range(steps):
-        pen.forward(i * step_length)
-        pen.right(turn + i * turn_move)
+        x = randint(
+            int(-screen.window_width() / 2),
+            int(screen.window_width() / 2)
+            )
+        y = randint(
+            int(-screen.window_height() / 2),
+            int(screen.window_height() / 2)
+            )
+        pen.goto(x, y)
 
         # color choice
         (x, y) = pen.pos()
         # color_pic = int(x - y)
         color_pic = randint(0, 360)
 
-        pen.color(int_to_rgb(color_pic))
+        pen.dot(5, int_to_rgb(color_pic))
+
 
     pen.up()
     pen.home()
-
 
 
 def main(repeat=True):
@@ -41,7 +44,7 @@ def main(repeat=True):
     pen = get_pen()
 
     while True:
-        Square_spiral(pen)
+        Random_point(pen, screen)
         pen.clear()
 
     screen.exitonclick()
