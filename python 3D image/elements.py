@@ -150,3 +150,19 @@ class Line:
     @property
     def delta_y(self):
         return self.p2.y - self.p1.y
+
+
+if __name__ == '__main__':
+    width = 1000
+    height = 1000
+
+    canvas = Canvas(width, height)
+
+    line = Line(Point(13, 20), Point(80, 40))
+    line.draw(canvas.canvas)
+
+    line = Line(Point(20, 13), Point(40, 80))
+    line.draw(canvas.canvas)
+
+    line = Line(Point(20, 13), Point(40, 80), color=(255, 0, 0))
+    line.draw(canvas.canvas)
