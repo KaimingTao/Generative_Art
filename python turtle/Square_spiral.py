@@ -19,17 +19,28 @@ def Square_spiral(pen):
     step_length = 4
     turn = 92
     turn_move = 0.01
+    pen.pensize(3)
 
     for i in range(steps):
-        pen.forward(i * step_length)
-        pen.right(turn + i * turn_move)
-
         # color choice
         (x, y) = pen.pos()
-        # color_pic = int(x - y)
-        color_pic = randint(0, 360)
+        color_pic = int(x - y)
+        # color_pic = randint(0, 360)
 
         pen.color(int_to_rgb(color_pic))
+
+        # for j in range(i + 1):
+        #     # color choice
+        #     (x, y) = pen.pos()
+        #     color_pic = int(x - y)
+        #     # color_pic = randint(0, 360)
+
+        #     pen.color(int_to_rgb(color_pic))
+
+        #     pen.forward(step_length)
+
+        pen.forward(i * step_length)
+        pen.right(turn + i * turn_move)
 
     pen.up()
     pen.home()
