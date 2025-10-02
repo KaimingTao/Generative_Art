@@ -36,6 +36,9 @@ class Point:
             return False
         return True
 
+    def copy(self):
+        return Point(self.x, self.y, self.color)
+
 
 class Line:
 
@@ -93,6 +96,23 @@ class Line:
                 y += 1 if self.delta_y > 0 else -1
 
                 y_error -= 2 * self.delta_x
+
+    def draw_zigzag(self, canvas):
+        # algorithm from Nand2tetris
+        a = 0
+        b = 0
+        diff = 0
+        while (a <= self.delta_x) and (b <= self.delta_y):
+            p1 = self.p1.copy()
+            p1.x += a
+            p1.y += b
+            canvas[p1.x, p1.y] = self.color
+            if diff < 0:
+                a = a + 1
+                diff = diff + self.delta_y
+            else:
+                b = b + 1
+                diff = diff - self.delta_y
 
     def draw1(self, canvas):
         raise NotImplementedError
@@ -152,17 +172,19 @@ class Line:
         return self.p2.y - self.p1.y
 
 
-if __name__ == '__main__':
-    width = 1000
-    height = 1000
+if __name__ == "__main__":
+    width = 100
+    height = 100
 
     canvas = Canvas(width, height)
 
     line = Line(Point(13, 20), Point(80, 40))
-    line.draw(canvas.canvas)
+    line.draw_zigzag(canvas.canvas)
 
     line = Line(Point(20, 13), Point(40, 80))
-    line.draw(canvas.canvas)
+    line.draw_zigzag(canvas.canvas)
 
     line = Line(Point(20, 13), Point(40, 80), color=(255, 0, 0))
-    line.draw(canvas.canvas)
+    line.draw_zigzag(canvas.canvas)
+
+    canvas.save()
