@@ -4,7 +4,7 @@ from pathlib import Path
 
 class Canvas:
 
-    def __init__(self, width, height, color_mode="RGB", bg_color="white"):
+    def __init__(self, width, height, color_mode="RGB", bg_color="black"):
         self.img = Image.new(color_mode, (width, height), bg_color)
         self.width = width
         self.height = height
@@ -58,6 +58,8 @@ class Line:
             self.p1, self.p2 = self.p2, self.p1
 
         # tan = abs(self.delta_y / self.delta_x) * 1.0
+
+        # print(self.p1, self.p2)
 
         y_error = 0
         y = int(self.p1.y)
@@ -179,12 +181,12 @@ if __name__ == "__main__":
     canvas = Canvas(width, height)
 
     line = Line(Point(13, 20), Point(80, 40))
-    line.draw_zigzag(canvas.canvas)
+    line.draw(canvas.canvas)
 
     line = Line(Point(20, 13), Point(40, 80))
-    line.draw_zigzag(canvas.canvas)
+    line.draw(canvas.canvas)
 
     line = Line(Point(20, 13), Point(40, 80), color=(255, 0, 0))
-    line.draw_zigzag(canvas.canvas)
+    line.draw(canvas.canvas)
 
     canvas.save()

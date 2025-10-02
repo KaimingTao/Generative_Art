@@ -1,7 +1,7 @@
 from pathlib import Path
 from elements import Point, Line, Canvas
 import random
-import time
+
 
 
 def profile():
