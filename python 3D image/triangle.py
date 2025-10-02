@@ -81,10 +81,15 @@ class Triangle:
 
     def fill(self, canvas):
         # Use barycentric coordination
+
+        if self.total_area < 0:
+            return
+
         bounding_box = BoundingBox(self)
         # print(bounding_box, self.color)
         # print(self.p1, self.p2, self.p3)
         # print(self.signed_area(self.p1, self.p2, self.p3))
+
         for x in range(bounding_box.min_x, bounding_box.max_x + 1):
             for y in range(bounding_box.min_y, bounding_box.max_y + 1):
                 if self.inside_triangle(Point(x, y)):
